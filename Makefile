@@ -6,7 +6,7 @@
 #    By: pharbst <pharbst@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 12:18:40 by peter             #+#    #+#              #
-#    Updated: 2022/05/24 17:25:23 by pharbst          ###   ########.fr        #
+#    Updated: 2022/06/11 11:45:50 by pharbst          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,21 +35,14 @@ $(OBJDIR)/%.o:	$(SRCDIR)/%.c ./ft_printf.h
 	@$(CC) $(CFLAGS) -o $@ -c $<
 
 clean:	
-	rm -rf $(OBJ)
-	rm -rf $(OBJDIR)
+	@rm -rf $(OBJ)
+	@rm -rf $(OBJDIR)
+	@make clean $(LIBFT)
 
 fclean:		clean
 	@rm -f $(NAME)
-
-cleanall:	clean
-	@make clean -C $(LIBFT)
-
-fcleanall:	fclean
-	@make fclean -C $(LIBFT)
-	@clear
+	@make fclean $(LIBFT)
 
 re:			fclean all
 
-reall:		fcleanall all
-
-.PHONY: 	clean fclean cleanall fcleanall reall all re
+.PHONY: 	clean fclean all re
