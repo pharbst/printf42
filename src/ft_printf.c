@@ -6,12 +6,23 @@
 /*   By: pharbst <pharbst@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:15:06 by pharbst           #+#    #+#             */
-/*   Updated: 2022/05/24 23:17:10 by pharbst          ###   ########.fr       */
+/*   Updated: 2022/06/12 16:43:30 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
-#include <printf.h>
+
+int	ft_check(const char **format)
+{
+	if (format[0][1] == 'X' || format[0][1] == 'x' || format[0][1] == 'd'
+		|| format[0][1] == 'i' || format[0][1] == 'p' || format[0][1] == 'u'
+		|| format[0][1] == '%' || format[0][1] == 'c' || format[0][1] == 's')
+	{
+		return (0);
+	}
+	*format = *format + 1;
+	return (1);
+}
 
 static char	*ft_strhelp(char *str)
 {
@@ -54,7 +65,7 @@ int	ft_check_parameter(va_list args, const char **format, char **buff,
 	if (**format == 'X')
 		return (ft_bufferjoin(buff, ft_strupper(ft_itohex(va_arg(args,
 							unsigned int))), buff_len, 0));
-	return (0);
+	return (buff_len);
 }
 
 int	ft_printf(const char *format, ...)
@@ -70,12 +81,12 @@ int	ft_printf(const char *format, ...)
 		return (0);
 	while (*format)
 	{
-		if (*format == '%')
+		if (*format == '%' && format[1] != '\0' && ft_check(&format) == 0)
 		{
 			format++;
 			ret = ft_check_parameter(args, &format, &buff, ret);
 		}
-		else
+		else if (*format != '%')
 			ret = ft_bufferjoin(&buff, ft_chartostr(*format), ret, 1);
 		format++;
 	}

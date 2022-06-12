@@ -1,1 +1,5 @@
 main.c
+a.out.dSYM
+a.out
+/obj
+/libft/obj

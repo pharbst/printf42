@@ -6,13 +6,13 @@
 #    By: pharbst <pharbst@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 12:18:40 by peter             #+#    #+#              #
-#    Updated: 2022/06/11 11:45:50 by pharbst          ###   ########.fr        #
+#    Updated: 2022/06/12 16:26:32 by pharbst          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= libftprintf.a
-CFLAGS	= -Wall -Wextra -Werror
-CC		= gcc
+CFLAGS	= -Wall -Wextra -Werror -g
+CC		= cc
 
 LIBFT	= ./libft/
 SRCDIR	= ./src/
@@ -37,12 +37,21 @@ $(OBJDIR)/%.o:	$(SRCDIR)/%.c ./ft_printf.h
 clean:	
 	@rm -rf $(OBJ)
 	@rm -rf $(OBJDIR)
-	@make clean $(LIBFT)
+	@make clean -C$(LIBFT)
 
 fclean:		clean
 	@rm -f $(NAME)
-	@make fclean $(LIBFT)
+	make fclean -C $(LIBFT)
+
+cleanall:	clean
+	@make clean -C $(LIBFT)
+
+fcleanall:	fclean
+	@make fclean -C $(LIBFT)
+	@clear
 
 re:			fclean all
 
-.PHONY: 	clean fclean all re
+reall:		fcleanall all
+
+.PHONY: 	clean fclean cleanall fcleanall reall all re
