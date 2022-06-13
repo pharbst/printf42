@@ -29,7 +29,7 @@ static char	*ft_reverse(char *a)
 	return (b);
 }
 
-static char	*ft_convert(unsigned long i, char neg)
+static char	*ft_convert(unsigned long  i, char neg)
 {
 	char	ret[33];
 	int		n;
