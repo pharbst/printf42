@@ -6,7 +6,7 @@
 /*   By: pharbst <pharbst@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:15:06 by pharbst           #+#    #+#             */
-/*   Updated: 2022/06/12 16:43:30 by pharbst          ###   ########.fr       */
+/*   Updated: 2022/06/23 06:15:26 by pharbst          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int	ft_check(const char **format)
 	{
 		return (0);
 	}
-	*format = *format + 1;
+	(*format)++;
+	//*format = *format + 1;
 	return (1);
 }
 
